@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, session, redirect, url_for
-
+import common
 app = Flask(__name__)
 
 app.secret_key = b'\xcb\xd2\x97\xd3\xbb\x86\x88$:\xc3G\x85'
+
+users = {"USER": "PAASWORD", "user":  "asdasd", "Alice": "PASSWORD"}
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -11,7 +13,8 @@ def login():
         session.pop('user_id', None)
         username = request.form['username']
         password = request.form['password']
-        if username == 'USER' and password == 'PASSWORD':
+
+        if common.can_user_login(username,password, users):
             session['user_id'] = 1
             return redirect(url_for('user_page'))
         else:
