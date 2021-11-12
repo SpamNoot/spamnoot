@@ -16,14 +16,16 @@ def login():
 
         if common.can_user_login(username,password, users):
             session['user_id'] = 1
-            return redirect(url_for('user_page'))
+            return redirect(url_for('user_page', username=username))
+
         else:
             return redirect(url_for('login'))
     return render_template("login.html")
 
-@app.route("/user_page")
-def user_page():
-    return render_template("user_page.html")
+
+@app.route("/<username>")
+def user_page(username):
+    return render_template("user_page.html", username=username)
 
 
 if __name__ == '__main__':
