@@ -1,6 +1,5 @@
 import unittest
-import spamnoot.common as common
-
+import common
 
 class LoginTest(unittest.TestCase):
 
