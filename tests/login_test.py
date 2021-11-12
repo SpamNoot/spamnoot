@@ -1,5 +1,5 @@
 import unittest
-import common
+from source import common
 
 
 class LoginTest(unittest.TestCase):
