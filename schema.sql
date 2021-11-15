@@ -5,4 +5,3 @@ CREATE TABLE user (
   username TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL
 );
-INSERT INTO user (username, password) VALUES ("USER", "PAASWORD")

@@ -19,7 +19,6 @@ except OSError:
 
 app.secret_key = b'\xcb\xd2\x97\xd3\xbb\x86\x88$:\xc3G\x85'
 app.config['DATABASE']=os.path.join(app.instance_path, 'db.sqlite')
-#users = {"USER": "PAASWORD", "user":  "asdasd", "Alice": "PASSWORD"}
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -36,12 +35,8 @@ def login():
 
         if user is None:
             error = 'Incorrect username.'
-        #user this after register page has been set up, until then passwords will be in plain text!
-        #elif not check_password_hash(user['password'], password):
-        elif user['password'] != password:
+        elif not check_password_hash(user['password'], password):
             error = 'Incorrect password.'
-        #common.can_user_login no longer needed
-        #if common.can_user_login(username,password, users):
         if error is None:
             session.clear()
             session['user_id'] = user['id']
@@ -50,7 +45,7 @@ def login():
         else:
             return redirect(url_for('login'))
     return render_template("login.html")
-
+@app.route("/register.html", methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
@@ -88,5 +83,3 @@ if __name__ == '__main__':
         port=8000,
         debug=True,
     )
-
-#git_push_test

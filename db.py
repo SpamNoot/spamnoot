@@ -3,6 +3,8 @@ from sqlite3.dbapi2 import PARSE_DECLTYPES
 import click
 from flask import current_app, g
 from flask.cli import with_appcontext
+from werkzeug.security import generate_password_hash
+
 
 def get_db():
     if 'db' not in g:
@@ -21,6 +23,11 @@ def init_db():
     db = get_db()
     with current_app.open_resource('schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
+        db.execute(
+                    "INSERT INTO user (username, password) VALUES (?, ?)",
+                    ("admin", generate_password_hash("admin")),
+                )
+        db.commit()
     
 @click.command('init-db')
 @with_appcontext
