@@ -39,3 +39,12 @@ def init_db_command():
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
+
+
+def add_note(text, userid):
+    database = get_db()
+    database.execute(
+        "INSERT INTO notes (note, ownerid) VALUES (?, ?)",
+        (text, userid),
+    )
+    database.commit()
