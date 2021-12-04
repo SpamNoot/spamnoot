@@ -48,3 +48,10 @@ def add_note(text, userid):
         (text, userid),
     )
     database.commit()
+
+def get_notes(userid):
+    database = get_db()
+    notes = database.execute(
+        'SELECT note FROM notes WHERE ownerid = ?', (userid,)
+    ).fetchall()
+    return notes
