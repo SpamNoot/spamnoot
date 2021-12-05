@@ -41,11 +41,11 @@ def init_app(app):
     app.cli.add_command(init_db_command)
 
 
-def add_note(text, userid):
+def add_note(text, userid, group="default"):
     database = get_db()
     database.execute(
-        "INSERT INTO notes (note, ownerid) VALUES (?, ?)",
-        (text, userid),
+        "INSERT INTO notes (note, ownerid, st) VALUES (?, ?, ?)",
+        (text, userid, group),
     )
     database.commit()
 
@@ -55,3 +55,10 @@ def get_notes(userid):
         'SELECT note FROM notes WHERE ownerid = ?', (userid,)
     ).fetchall()
     return notes
+
+def archive_note(noteid):
+    database = get_db()
+    database.execute(
+        "UPDATE notes\nSET st = 'deleted' WHERE id = (?)",
+        (noteid),
+    )
