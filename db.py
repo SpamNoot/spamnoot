@@ -62,3 +62,4 @@ def archive_note(noteid):
         "UPDATE notes\nSET st = 'deleted' WHERE id = (?)",
         (noteid),
     )
+    database.commit()
