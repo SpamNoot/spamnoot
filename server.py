@@ -63,7 +63,8 @@ def register():
 
 @app.route("/<username>")
 def user_page(username):
-    return render_template("homepage.html", username=username)
+    notes = db.get_notes(session['user_id'])
+    return render_template("homepage.html", username=username, notes=notes)
 
 if __name__ == '__main__':
     app.run(
