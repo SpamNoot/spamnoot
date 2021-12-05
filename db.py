@@ -28,6 +28,8 @@ def init_db():
                     ("admin", generate_password_hash("admin")),
                 )
         db.commit()
+        add_note("first", "I actually have nothing to say", 1)
+        add_note("check", "Just checking if this still works... \n Seems like it does ;)", 1)
     
 @click.command('init-db')
 @with_appcontext
@@ -41,19 +43,23 @@ def init_app(app):
     app.cli.add_command(init_db_command)
 
 
-def add_note(text, userid, group="default"):
+def add_note(title, text, userid, group="default"):
     database = get_db()
     database.execute(
-        "INSERT INTO notes (note, ownerid, st) VALUES (?, ?, ?)",
-        (text, userid, group),
+        "INSERT INTO notes (title, note, ownerid, st) VALUES (?, ?, ?, ?)",
+        (title, text, userid, group),
     )
     database.commit()
 
 def get_notes(userid):
     database = get_db()
-    notes = database.execute(
+    notestext = database.execute(
         'SELECT note FROM notes WHERE ownerid = ?', (userid,)
     ).fetchall()
+    notestitles = database.execute(
+        'SELECT title FROM notes WHERE ownerid = ?', (userid,)
+    ).fetchall()
+    notes = list(zip(notestitles, notestext))
     return notes
 
 def archive_note(noteid):
