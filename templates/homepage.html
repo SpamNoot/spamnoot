@@ -140,6 +140,51 @@
         </div>
 
         <div class="notes">
+            {% for onenote in notes %}
+                <div class="note" id="note.id">
+                    <div class="note-items">
+                    <span class="material-icons check-circle">check_circle</span>
+                    <div class="title">{{onenote[0][0]}}</div>
+                    <div class="text">{{onenote[1][0]}}</div>
+                    </div>
+                    <div class="note-footer">
+                    <div class="tooltip">
+                        <span class="material-icons-outlined hover small-icon"
+                        >add_alert</span
+                        >
+                        <span class="tooltip-text">Remind me</span>
+                    </div>
+                    <div class="tooltip">
+                        <span class="material-icons-outlined hover small-icon"
+                        >person_add</span
+                        >
+                        <span class="tooltip-text">Collaborator</span>
+                    </div>
+                    <div class="tooltip">
+                        <span class="material-icons-outlined hover small-icon"
+                        >palette</span
+                        >
+                        <span class="tooltip-text">Change Color</span>
+                    </div>
+                    <div class="tooltip">
+                        <span class="material-icons-outlined hover small-icon"
+                        >image</span
+                        >
+                        <span class="tooltip-text">Add Image</span>
+                    </div>
+                    <div class="tooltip">
+                        <span class="material-icons-outlined hover small-icon delete" id="${note.id}">archive</span>
+                        <span class="tooltip-text">Archive</span>
+                    </div>
+                    <div class="tooltip">
+                        <span class="material-icons-outlined hover small-icon"
+                        >more_vert</span
+                        >
+                        <span class="tooltip-text">More</span>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
             <div class="note" id="note.id">
                 <div class="note-items">
                 <span class="material-icons check-circle">check_circle</span>
