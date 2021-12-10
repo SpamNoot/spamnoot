@@ -232,7 +232,8 @@ input:focus {
 .note {
     background: rgb(203, 148, 254);
     display:grid;
-    width: 240px;
+    width: 250px;
+    height:300px;
     margin: 10px;
     border: 1px solid #e0e1e0;
     border-radius: 8px;
@@ -246,6 +247,17 @@ input:focus {
     width: 100%;
     margin: 10px 0 0 15px;
 }
+
+.note img{
+    display:grid;
+    width: 220px;
+    margin: 10px;
+    border: 1px solid #e0e1e0;
+    border-radius: 8px;
+    position: relative;
+}
+
+
 .note .note-footer {
     display: flex;
     margin-top: 15px;
@@ -255,11 +267,16 @@ input:focus {
 .note-footer .material-icons-outlined {
     color: #5f6368;
 }
+
+
+
 .note .check-circle {
     position: absolute;
     left: -10px;
     top: -10px;
 }
+
+
 
 .modal {
     position: fixed;
